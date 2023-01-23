@@ -17,8 +17,6 @@ pipeline {
                     git checkout -b develop origin/develop
                     git checkout -b master origin/master
                     git merge develop
-                    git config --global user.name "Osurac"
-                    git config --global user.email oravla.rodriguez@gmail.com
                 """, label: "Merging code to master"
                 sshagent(['github']) {
                     sh "git push origin master"
