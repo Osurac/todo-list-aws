@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2021-01-08
 ### Added
 - Versión inicial de código.
-
-## [1.0.0] - 2022-01-10
+### Added
+- Rama master.
 ### Added
 - Branch para test local de sam.
 - Run deploy --guided 
