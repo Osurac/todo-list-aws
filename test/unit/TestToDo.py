@@ -206,10 +206,32 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertRaises(TypeError, delete_item("", self.dynamoError))
         print ('End: test_delete_todo_error')
     
-    def test_api_translatetodo(self):
+    def test_api_translate_todo(self):
         print('---------------------------------------')
-        print('Starting: test_api_translatetodo')
-        print('End: test_api_translatetodo')
+        print('Starting: test_api_translate_todo')
+        from src.todoList import put_item
+        from src.todoList import translate_item
+        from src.todoList import get_item
+        text_to_translate = "Aprender más cosas que DevOps y Cloud en la UNIR"
+        translated_text = "Aprender más cosas que DevOps y Cloud en la UNIR"
+        # Testing file functions
+        # Table mock
+        responsePut = put_item(text_to_translate, self.dynamodb)
+        print ('Response put_item:' + str(responsePut))
+        idItem = json.loads(responsePut['body'])['id']
+        print ('Id item:' + idItem)
+        self.assertEqual(200, responsePut['statusCode'])
+        responseGet = get_item(
+                idItem,
+                self.dynamodb)
+        print ('Response Get:' + str(responseGet))
+        self.assertEqual(
+            text_to_translate,
+            responseGet['text'])
+        result = translate_item(responseGet['text'], 'en', self.dynamodb)
+        print ('Result Update Item:' + str(result))
+        self.assertEqual(result, translated_text)
+        print('End: test_api_translate_todo')
 
 if __name__ == '__main__':
     unittest.main()
