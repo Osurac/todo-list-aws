@@ -205,7 +205,7 @@ class TestApi(unittest.TestCase):
         print('Starting - integration test Translate TODO')
         #Add TODO
         url = BASE_URL+"/todos"
-        data = { "text": "Integration text example - Translate" }
+        data = { "text": "Texto de integración ejemplo - Traducir" }
         response = requests.post(url, data=json.dumps(data))
         json_response = response.json()
         print('Response Add Todo: '+ str(json_response))
@@ -216,13 +216,35 @@ class TestApi(unittest.TestCase):
             response.status_code, 200, "Error en la petición API a {url}" 
         )
         self.assertEqual(
-            jsonbody['text'], "Integration text example - Translate", "Error en la petición API a {url}"
+            jsonbody['text'], "Texto de integración ejemplo - Traducir", "Error en la petición API a {url}"
         )
-        #Test GET TODO
-        url = BASE_URL + "/todos/" + ID_TODO + "/fr"
+        #Test GET TODO 
+        url = BASE_URL+"/todos/"+ID_TODO
         response = requests.get(url)
         json_response = response.json()
         print('Response Get Todo: '+ str(json_response))
+        self.assertEqual(
+            response.status_code, 200, "Error en la petición API a {url}"
+        )
+        self.assertEqual(
+            json_response['text'], "Texto de integración ejemplo - Traducir", "Error en la petición API a {url}"
+        )
+        #Test TRANSLATE EN TODO
+        url = BASE_URL + "/todos/" + ID_TODO + "/en"
+        response = requests.get(url)
+        json_response = response.json()
+        print('Response Translate EN Todo: '+ str(json_response))
+        self.assertEqual(
+            response.status_code, 200, "Error en la petición API a {url}"
+        )
+        self.assertEqual(
+            json_response, "Integration text example - Translate", "Error en la petición API a {url}"
+        )
+        #Test TRANSLATE FR
+        url = BASE_URL + "/todos/" + ID_TODO + "/fr"
+        response = requests.get(url)
+        json_response = response.json()
+        print('Response Translate FR Todo: '+ str(json_response))
         self.assertEqual(
             response.status_code, 200, "Error en la petición API a {url}"
         )
