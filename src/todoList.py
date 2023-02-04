@@ -152,12 +152,12 @@ def create_todo_table(dynamodb):
 
 
 def translate_item(text, language, dynamodb=None):
-    session = boto3.Session(aws_access_key_id=ACCESS_KEY,
-                            aws_secret_access_key=SECRET_KEY,
-                            aws_session_token=SESSION_TOKEN)
-    client = session.client(service_name='translate',
-                            use_ssl=True,
-                            region_name='us-east-1')
+    client = boto3.client(service_name='translate',
+                          use_ssl=True,
+                          aws_access_key_id=ACCESS_KEY,
+                          aws_secret_access_key=SECRET_KEY,
+                          aws_session_token=SESSION_TOKEN,
+                          region_name='us-east-1')
     try:
         res = client.translate_text(
             Text=text, SourceLanguageCode="auto", TargetLanguageCode=language)
