@@ -12,9 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rama master.
 - Branch para test local de sam.
 - Run deploy --guided 
-## [1.1.0] - 2023-01-08
+## [1.1.0] - 2023-04-08
 ### Added
 - Cambios Cobertura > 80%
-## [1.2.0] - 2023-01-08
+## [1.2.0] - 2023-04-08
 ### Added
 - V1 Translate
