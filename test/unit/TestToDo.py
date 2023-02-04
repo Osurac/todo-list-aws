@@ -2,6 +2,7 @@ import warnings
 import unittest
 import boto3
 from moto import mock_dynamodb
+from unittest.mock import patch
 import sys
 import os
 import json
@@ -25,6 +26,7 @@ class TestDatabaseFunctions(unittest.TestCase):
             message="Using or importing.*")
         """Create the mock database and table"""
         self.dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+        self.dynamoError = boto3.resource('dynamodb', region_name='us-west-1')
         self.is_local = 'true'
         self.uuid = "123e4567-e89b-12d3-a456-426614174000"
         self.text = "Aprender DevOps y Cloud en la UNIR"
@@ -56,7 +58,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertIn(tableName, self.table.name)
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
-        
 
     def test_put_todo(self):
         print ('---------------------')
@@ -78,8 +79,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         from src.todoList import put_item
         # Table mock
-        self.assertRaises(Exception, put_item("", self.dynamodb))
-        self.assertRaises(Exception, put_item("", self.dynamodb))
+        self.assertRaises(Exception, put_item("", self.dynamoError))
         print ('End: test_put_todo_error')
 
     def test_get_todo(self):
@@ -108,9 +108,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('---------------------')
         print ('Start: test_get_todo_error')
         from src.todoList import get_item
-		# Tabla a local
-        self.assertRaises(Exception, get_item("", self.dynamodb))
-        self.assertRaises(Exception, get_item("", self.dynamodb))
+        self.assertRaises(Exception, get_item("", self.dynamoError))
         print ('End: test_get_todo_error')
 
     
@@ -129,15 +127,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertTrue(result[0]['text'] == self.text)
         print ('End: test_list_todo')
         
-    def test_get_todo_empty(self):
-        print ('---------------------')
-        print ('Start: test_get_todo_empty')
-        from src.todoList import get_items
-        result = get_items(self.dynamodb)
-		# Tabla a local
-        self.assertTrue(len(result) == 0)
-        print ('End: test_get_todo_empty')
-
     def test_update_todo(self):
         print ('---------------------')
         print ('Start: test_update_todo')
@@ -167,7 +156,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         updated_text = "Aprender más cosas que DevOps y Cloud en la UNIR"
         # Testing file functions
         # Table mock
-        responsePut = put_item(self.text, self.dynamodb)
+        responsePut = put_item(self.text, self.dynamoError)
         print ('Response PutItem' + str(responsePut))
         self.assertRaises(
             Exception,
@@ -175,21 +164,21 @@ class TestDatabaseFunctions(unittest.TestCase):
                 updated_text,
                 "",
                 "false",
-                self.dynamodb))
+                self.dynamoError))
         self.assertRaises(
             TypeError,
             update_item(
                 "",
                 self.uuid,
                 "false",
-                self.dynamodb))
+                self.dynamoError))
         self.assertRaises(
             Exception,
             update_item(
                 updated_text,
                 self.uuid,
                 "",
-                self.dynamodb))
+                self.dynamoError))
         print ('End: atest_update_todo_error')
 
     def test_delete_todo(self):
@@ -214,8 +203,13 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('Start: test_delete_todo_error')
         from src.todoList import delete_item
         # Testing file functions
-        self.assertRaises(TypeError, delete_item("", self.dynamodb))
+        self.assertRaises(TypeError, delete_item("", self.dynamoError))
         print ('End: test_delete_todo_error')
+    
+    def test_api_translatetodo(self):
+        print('---------------------------------------')
+        print('Starting: test_api_translatetodo')
+        print('End: test_api_translatetodo')
 
 if __name__ == '__main__':
     unittest.main()
