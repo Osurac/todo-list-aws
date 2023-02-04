@@ -5,9 +5,6 @@ import uuid
 import json
 import functools
 from botocore.exceptions import ClientError
-ACCESS_KEY = os.environ['ACCESS_KEY']
-SECRET_KEY = os.environ['SECRET_KEY']
-SESSION_TOKEN = os.environ['SESSION_TOKEN']
 
 
 def get_table(dynamodb=None):
