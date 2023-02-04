@@ -212,6 +212,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         from src.todoList import put_item
         from src.todoList import translate_item
         from src.todoList import get_item
+        from src.todoList import delete_item
         text_to_translate = "Aprender más cosas que DevOps y Cloud en la UNIR"
         translated_text = "Learning more than DevOps and Cloud at UNIR"
         # Testing file functions
@@ -231,6 +232,8 @@ class TestDatabaseFunctions(unittest.TestCase):
         result = translate_item(text_to_translate, "en", self.dynamodb)
         print ('Result Translate Item:' + str(result))
         self.assertEqual(result, translated_text)
+        delete_item(idItem, self.dynamodb)
+        print ('Item deleted succesfully')
         print('End: test_api_translate_todo')
 
 if __name__ == '__main__':
