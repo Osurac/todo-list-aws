@@ -149,7 +149,9 @@ def create_todo_table(dynamodb):
 
 
 def translate_item(text, language, dynamodb=None):
-    client = boto3.client(service_name='translate', region_name='us-east-1')
+    client = boto3.client(service_name='translate',
+        use_ssl=True, 
+        region_name='us-east-1')
     try:
         res = client.translate_text(
             Text=text, SourceLanguageCode="auto", TargetLanguageCode=language)

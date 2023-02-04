@@ -228,7 +228,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertEqual(
             text_to_translate,
             responseGet['text'])
-        result = translate_item(text_to_translate, 'en', self.dynamodb)
+        result = translate_item(text_to_translate, "en", self.dynamodb)
         print ('Result Translate Item:' + str(result))
         self.assertEqual(result, translated_text)
         print('End: test_api_translate_todo')
