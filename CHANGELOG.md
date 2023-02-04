@@ -24,3 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.2] - 2023-04-08
 ### Added
 - Pruebas Unitarias
+## [1.3.0] - 2023-04-08
+### Added
+- Translate en todos los entornos y versión funcional final
