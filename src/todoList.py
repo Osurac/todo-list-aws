@@ -150,7 +150,8 @@ def create_todo_table(dynamodb):
 def translate_item(text, language, dynamodb=None):
     client = boto3.client(service_name='translate', region_name='us-east-1')
     try:
-        res = client.translate.translate_text(Text=text, SourceLanguageCode="auto", TargetLanguageCode=language)
+        res = client.translate_text(
+            Text=text, SourceLanguageCode="auto", TargetLanguageCode=language)
     except ClientError as e:
         print(e.response['Error']['Message'])
     else:
