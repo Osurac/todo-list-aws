@@ -6,17 +6,6 @@ import json
 import functools
 from botocore.exceptions import ClientError
 
-ACCESS_KEY = "ASIAWLNG7FL2WL3WXTZN"
-SECRET_KEY = "JYNDY+jg2pNeBvfTqYbDbxYHFTmVxFH9XUkB+FW1"
-SESSION_TOKEN = ("FwoGZXIvYXdzEKL//////////wEaDH953LPgFAc7e1V9bCLRAaDJLhzZY"
-                 "MJCTxhffIRi/ay876kpzgFdEEO+D9eeNjGuinUYW+D2qQ4Op0cRJp/6rj7"
-                 "HOkC1DPpSFIx32uJzhPBYjznQuwFIRuaG/8WJ0cqnhbA1N20FojD5q/mK7"
-                 "ll3zDLn+p3XF1HhXjFLEypXTR8Q7Kb1Y3RqQIXQx+MJBBZ4W8JIgklERwik"
-                 "omOIiYpLY6xXftnRUDpDvC4kqlvR6r6i+jAvmkZ6UT8Mkbf9jmoUPrQMEGgI"
-                 "c2SsrvcyFQvKkv07jORXMf/X08KkBgUXXiW8KNeY+p4GMi2tA3ynEoKPNOc8"
-                 "THQOrCYQ5GuTPHRW3Q9yUTsAteYEA98sRX+P7NbQ6RLzatA=")
-
-
 def get_table(dynamodb=None):
     if not dynamodb:
         URL = os.environ['ENDPOINT_OVERRIDE']
@@ -161,9 +150,6 @@ def create_todo_table(dynamodb):
 def translate_item(text, language, dynamodb=None):
     client = boto3.client(service_name='translate',
                           use_ssl=True,
-                          aws_access_key_id=ACCESS_KEY,
-                          aws_secret_access_key=SECRET_KEY,
-                          aws_session_token=SESSION_TOKEN,
                           region_name='us-east-1')
     try:
         res = client.translate_text(
