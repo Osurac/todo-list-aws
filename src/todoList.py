@@ -149,7 +149,7 @@ def create_todo_table(dynamodb):
 
 
 def translate_item(text, language, dynamodb=None):
-    session = boto3.Session(profile_name='default')
+    session = boto3.Session(profile_name='dev')
     client = session.client(service_name='translate',
                             use_ssl=True,
                             region_name='us-east-1')
