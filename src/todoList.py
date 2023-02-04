@@ -8,7 +8,7 @@ from botocore.exceptions import ClientError
 
 ACCESS_KEY = "ASIAWLNG7FL2WL3WXTZN"
 SECRET_KEY = "JYNDY+jg2pNeBvfTqYbDbxYHFTmVxFH9XUkB+FW1"
-SESSION_TOKEN = ("FwoGZXIvYXdzEKL//////////wEaDH953LPgFAc7e1V9bCLRAaDJLhzZY" 
+SESSION_TOKEN = ("FwoGZXIvYXdzEKL//////////wEaDH953LPgFAc7e1V9bCLRAaDJLhzZY"
                  "MJCTxhffIRi/ay876kpzgFdEEO+D9eeNjGuinUYW+D2qQ4Op0cRJp/6rj7"
                  "HOkC1DPpSFIx32uJzhPBYjznQuwFIRuaG/8WJ0cqnhbA1N20FojD5q/mK7"
                  "ll3zDLn+p3XF1HhXjFLEypXTR8Q7Kb1Y3RqQIXQx+MJBBZ4W8JIgklERwik"
