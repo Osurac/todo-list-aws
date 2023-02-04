@@ -5,6 +5,9 @@ import uuid
 import json
 import functools
 from botocore.exceptions import ClientError
+ACCESS_KEY = os.environ['ACCESS_KEY']
+SECRET_KEY = os.environ['SECRET_KEY']
+SESSION_TOKEN = os.environ['SESSION_TOKEN']
 
 
 def get_table(dynamodb=None):
@@ -149,7 +152,9 @@ def create_todo_table(dynamodb):
 
 
 def translate_item(text, language, dynamodb=None):
-    session = boto3.Session(profile_name='dev')
+    session = boto3.Session(aws_access_key_id=ACCESS_KEY,
+                            aws_secret_access_key=SECRET_KEY,
+                            aws_session_token=SESSION_TOKEN)
     client = session.client(service_name='translate',
                             use_ssl=True,
                             region_name='us-east-1')
